@@ -56,8 +56,8 @@ module Api
             def upvote
                 post = Post.find(params[:id])
                 data = JSON.parse(request.body.read)
-                username = data['username']
-                post.votes << username
+                userid = data['user_id']
+                post.votes << userid
                 post.save
                 render json: PostSerializer.new(post).serialized_json
             end
@@ -65,8 +65,8 @@ module Api
             def downvote
                 post = Post.find(params[:id])
                 data = JSON.parse(request.body.read)
-                username = data['username']
-                post.votes.delete(username)
+                userid = data['user_id']
+                post.votes.delete(userid)
                 post.save
                 render json: PostSerializer.new(post).serialized_json
             end
