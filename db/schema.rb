@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_23_172845) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "body"
-    t.integer "votes", default: [], array: true
+    t.jsonb "votes"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

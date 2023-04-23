@@ -55,7 +55,9 @@ module Api
 
             def upvote
                 post = Post.find(params[:id])
-                post.votes += 1
+                data = JSON.parse(request.body.read)
+                username = data['username']
+                post.votes << username
                 post.save
                 render json: PostSerializer.new(post).serialized_json
             end
