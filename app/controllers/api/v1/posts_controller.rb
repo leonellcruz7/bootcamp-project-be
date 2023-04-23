@@ -14,6 +14,14 @@ module Api
                 render json: PostSerializer.new(post, data).serialized_json
             end
 
+            def search
+                data = JSON.parse(request.body.read)
+                query = data['title']
+                post = Post.where("lower(downcase_title) LIKE ?", "%#{query}%")
+
+                render json: PostSerializer.new(post, data).serialized_json
+            end
+
             def create
                 post = Post.new(post_params)
                 post.tags = params[:post][:tags] 

@@ -5,6 +5,7 @@ namespace :api do
 
     post '/users/login', to: 'users#login'
     resources :posts
+    post "/posts/search", to: "posts#search"
     post '/posts', to: 'posts#get_by_tags'
     put '/posts/upvote/:id', to: 'posts#upvote'
     put '/posts/downvote/:id', to: 'posts#downvote'
