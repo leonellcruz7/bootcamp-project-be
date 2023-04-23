@@ -64,10 +64,10 @@ module Api
 
             def downvote
                 post = Post.find(params[:id])
-                    post.votes -= 1
-                    if post.votes > 0 
-                        post.save
-                    end
+                data = JSON.parse(request.body.read)
+                username = data['username']
+                post.votes.delete(username)
+                post.save
                 render json: PostSerializer.new(post).serialized_json
             end
             
