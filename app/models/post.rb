@@ -4,7 +4,7 @@ class Post < ApplicationRecord
 before_create :vote
 before_save :downcase
   def vote
-    self.votes = 0
+    self.votes = []
   end
   def downcase
     self.downcase_title = title.downcase
