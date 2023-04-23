@@ -57,7 +57,7 @@ module Api
                 post = Post.find(params[:id])
                 data = JSON.parse(request.body.read)
                 userid = data['user_id']
-                post.votes << userid
+                post.votes << userid unless post.votes.include?(userid)
                 post.save
                 render json: PostSerializer.new(post).serialized_json
             end

@@ -7,8 +7,8 @@ namespace :api do
     resources :posts
     post "/posts/search", to: "posts#search"
     post '/posts', to: 'posts#get_by_tags'
-    put '/posts/upvote/:id', to: 'posts#upvote'
-    put '/posts/downvote/:id', to: 'posts#downvote'
+    post '/posts/upvote/:id', to: 'posts#upvote'
+    post '/posts/downvote/:id', to: 'posts#downvote'
 
     resources :comments
   end
