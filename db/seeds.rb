@@ -39,7 +39,8 @@ comments = Comment.create([
     {
         message: "test comment",
         username: "leonell_cruz",
-        post: posts.first
+        post: posts.first,
+        votes: []
     }
 ])
 replies = Reply.create([

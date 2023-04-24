@@ -9,7 +9,8 @@ namespace :api do
     post '/posts', to: 'posts#get_by_tags'
     post '/posts/upvote/:id', to: 'posts#upvote'
     post '/posts/downvote/:id', to: 'posts#downvote'
-
+    post '/comments/upvote/:id', to: 'comments#upvote'
+    post '/comments/downvote/:id', to: 'comments#downvote'
     resources :comments
     resources :replies
   end

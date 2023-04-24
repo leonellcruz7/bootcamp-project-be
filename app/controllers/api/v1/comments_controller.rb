@@ -35,6 +35,29 @@ module Api
                 end
             end
 
+            def upvote
+
+                comment = Comment.find(params[:id])
+                data = JSON.parse(request.body.read)
+                userid = data['user_id']
+                comment.votes << userid unless comment.votes.include?(userid)
+                comment.save
+                render json: CommentSerializer.new(comment).serialized_json
+
+                
+            end
+            def downvote
+
+                comment = Comment.find(params[:id])
+                data = JSON.parse(request.body.read)
+                userid = data['user_id']
+                comment.votes.delete(userid)
+                comment.save
+                render json: CommentSerializer.new(comment).serialized_json
+
+                
+            end
+
             private
 
 
