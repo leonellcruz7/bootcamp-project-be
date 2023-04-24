@@ -3,14 +3,18 @@ namespace :api do
   namespace :v1 do
     resources :users, param: :username
 
-    post '/users/login', to: 'users#login'
+    #post '/users/login', to: 'users#login'
     resources :posts
-    post "/posts/search", to: "posts#search"
-    post '/posts', to: 'posts#get_by_tags'
-    post '/posts/upvote/:id', to: 'posts#upvote'
-    post '/posts/downvote/:id', to: 'posts#downvote'
+      post "/posts/search", to: "posts#search"
+      post '/posts', to: 'posts#get_by_tags'
+      post '/posts/upvote/:id', to: 'posts#upvote'
+      post '/posts/downvote/:id', to: 'posts#downvote'
 
     resources :comments
+
+    resource :users, only: [:create]
+      post "/login", to: "users#login"
+      get "/auto_login", to: "users#auto_login"
   end
 end
 end

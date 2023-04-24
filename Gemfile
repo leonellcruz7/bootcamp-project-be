@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.0.0"
+ruby "3.1.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.3"
@@ -33,6 +33,8 @@ gem 'fast_jsonapi'
 
 gem 'rack-cors'
 
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
