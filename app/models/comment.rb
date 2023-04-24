@@ -1,9 +1,9 @@
 class Comment < ApplicationRecord
   belongs_to :post
   before_create :vote
-
+  has_many :replies
   def vote
-    self.votes = 0
+    self.votes = []
   end
 
 end

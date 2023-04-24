@@ -11,6 +11,7 @@ namespace :api do
     post '/posts/downvote/:id', to: 'posts#downvote'
 
     resources :comments
+    resources :replies
   end
 end
 end

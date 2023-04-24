@@ -4,10 +4,16 @@ module Api
             protect_from_forgery with: :null_session
 
             def index
-               comments = Comment.all 
+                comments = Comment.all 
+ 
+                render json: CommentSerializer.new(comments, post).serialized_json
+             end
 
-               render json: CommentSerializer.new(comments, post).serialized_json
-            end
+             def show
+                comment = Comment.find(params[:id]) 
+ 
+                render json: CommentSerializer.new(comment, post).serialized_json
+             end
 
             def create
                 comment = Comment.new(comment_params)
@@ -40,6 +46,7 @@ module Api
             
             def post
                 @post ||= {include: %i[post]}
+                @replies ||= {include: %i[replies]}
             end
 
 
