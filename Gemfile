@@ -36,6 +36,9 @@ gem 'rack-cors'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 
+gem 'rails_12factor', group: :production
+
+
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
