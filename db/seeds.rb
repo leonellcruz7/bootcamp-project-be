@@ -15,6 +15,13 @@ users = User.create([
         username: "ange_cruz",
         email: "ange@mail.com",
         password: "sample"
+    },
+    {
+        firstname: "Kennedy",
+        lastname: "De Vera",
+        username: "ken_dev",
+        email: "ken@mail.com",
+        password: "test"
     }
 ])
 
