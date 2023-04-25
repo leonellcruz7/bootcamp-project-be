@@ -1,7 +1,8 @@
 module Api
     module V1
         class UsersController < ApplicationController
-            protect_from_forgery with: :null_session
+            protect_from_forgery with: :exception, except: [:create, :login]
+            before_action :authorized, only: [:auto_login]
 
             def index
                 users = User.all
@@ -41,26 +42,43 @@ module Api
                 
             end
 
-            def login
-                data = JSON.parse(request.body.read)
-                user = User.find_by(username: data['username'])
+            # def login
+            #     data = JSON.parse(request.body.read)
+            #     user = User.find_by(username: data['username'])
 
-                if user
-                    if user.password == data['password']
-                        render json: UserSerializer.new(user), status: 200
-                    else
-                        render json: {error: "incorrect password"}, status: 422
-                    end
+            #     if user
+            #         if user.password == data['password']
+            #             render json: UserSerializer.new(user), status: 200
+            #         else
+            #             render json: {error: "incorrect password"}, status: 422
+            #         end
+            #     else
+            #         render json: {error: "user does not exist"}, status: 422
+            #     end
+            # end
+
+            def login
+
+                @user = User.find_by(username: params[:username])
+        
+                if @user && @user.authenticate(params[:password])
+                  token = encode_token({user_id: @user.id})
+                  render json: {user: @user, token: token}
                 else
-                    render json: {error: "user does not exist"}, status: 422
+                  render json: {error: "Invalid username or password"}
                 end
             end
 
+              def auto_login
+                render json: @user
+              end
             private
 
             def user_params
-                params.require(:user).permit(:email,:username,:password)
+                params.require(:user).permit(:email,:username,:password_digest)
             end
+
+         
         end
         
     end
